@@ -1,5 +1,3 @@
-//   qmk compile -kb crkbd -km myCorneKeyboardLayout:flash      <- to flash
-
 #include QMK_KEYBOARD_H
 
 extern keymap_config_t keymap_config;
@@ -14,7 +12,6 @@ extern rgblight_config_t rgblight_config;
 static uint32_t oled_timer = 0;
 #endif
 
-extern uint8_t is_master;
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -41,17 +38,7 @@ enum custom_keycodes {
 };
 
 enum {
-    TD_CAPLOCK,
-    TD_ALT,
-    TD_A,
-    TD_E,
-    TD_I,
-    TD_O,
-    TD_U,
-    TD_N,
-    TD_EXC,
-    TD_QST,
-    TD_DIST
+    TD_CAPLOCK
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -93,11 +80,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     
   [_RAISE] = LAYOUT(
   //|-----------------------------------------------------|                    |-----------------------------------------------------|
-       KC_F1,  TD(TD_EXC),KC_F3, TD(TD_E),  KC_F5,   KC_F6,                        KC_F7,  TD(TD_U),  TD(TD_I),TD(TD_O),  KC_F11, KC_F12,
+       KC_F1,   KC_F2,   KC_F3,   KC_F4,  KC_F5,   KC_F6,                         KC_F7,   KC_F8,    KC_F9,  KC_F10,  KC_F11, KC_F12,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     XXXXXXX, TD(TD_A), XXXXXXX, XXXXXXX, MACRO1, XXXXXXX,                       KC_INS,  KC_HOME, KC_PGUP, KC_LBRC, TD(TD_N), KC_BSLS,
+     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MACRO1, XXXXXXX,                       KC_INS,  KC_HOME, KC_PGUP, KC_LBRC, KC_RBRC, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     TD(TD_CAPLOCK),XXXXXXX,XXXXXXX,XXXXXXX,DVORAK,QWERTY,                     KC_DEL,  KC_END,  KC_PGDN, XXXXXXX,TD(TD_QST),KC_RSFT,
+     TD(TD_CAPLOCK),XXXXXXX,XXXXXXX,XXXXXXX,DVORAK,QWERTY,                     KC_DEL,  KC_END,  KC_PGDN,  XXXXXXX, XXXXXXX, KC_RSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LCTL, KC_SPC,  LOWER,    XXXXXXX, KC_LGUI, KC_LALT
                                       //|--------------------------|  |--------------------------|
@@ -117,23 +104,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-
-// Tap Dance definitions
-/*
-qk_tap_dance_action_t tap_dance_actions[] = {
-    // Tap once for ;, twice for :
-    [TD_CAPLOCK] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
-    // [TD_ALT] = ACTION_TAP_DANCE_DOUBLE(KC_RALT, KC_LALT),
-    [TD_A] = ACTION_TAP_DANCE_DOUBLE(XXXXXXX, RALT(KC_A)),
-    [TD_E] = ACTION_TAP_DANCE_DOUBLE(KC_F4, RALT(KC_E)),
-    [TD_I] = ACTION_TAP_DANCE_DOUBLE(KC_F9, RALT(KC_I)),
-    [TD_O] = ACTION_TAP_DANCE_DOUBLE(KC_F10, RALT(KC_O)),
-    [TD_U] = ACTION_TAP_DANCE_DOUBLE(KC_F8, RALT(KC_U)),
-    [TD_N] = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, RALT(KC_N)),
-    [TD_EXC] = ACTION_TAP_DANCE_DOUBLE(KC_F2, RALT(KC_EXLM)),
-    [TD_QST] = ACTION_TAP_DANCE_DOUBLE(XXXXXXX, RALT(KC_SLSH))
-};
-*/
 
 int RGB_current_mode;
 
@@ -376,13 +346,13 @@ void render_status_secondary(void) {
 bool oled_task_user(void) {
     if (timer_elapsed32(oled_timer) > 1500000) {
         oled_off();
-        //return;
+        return true;
     }
 #ifndef SPLIT_KEYBOARD
     else { oled_on(); }
 #endif
 
-    if (is_master) {
+    if (is_keyboard_master()) {
         render_status_main();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
         render_status_secondary();
