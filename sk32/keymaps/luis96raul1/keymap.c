@@ -122,27 +122,53 @@ void matrix_init_user(void) {
     #endif
 }
 
+//RGB MATRIX CUSTOM LAYER LIGHTING
+//THIS ALLOWS TO CHANGE RGB COLOR OF WHOLE KEYBOARD DEPENDING ON WHICH LAYER YOU ARE
+//CONVERSION BETWEEN HSV AND RGB IS NEEDED
+//THIS CODE REDUCES POWER CONSUMPTION (LESS CURRENT)
+#ifdef RGB_MATRIX_ENABLE
 void rgb_matrix_indicators_user(void) {
-  #ifdef RGB_MATRIX_ENABLE
-  switch (biton32(layer_state)) {
+
+    //COLORS HSV
+    //HSV_AZURE, HSV_BLACK/HSV_OFF, HSV_BLUE, HSV_CHARTREUSE, HSV_CORAL, HSV_CYAN
+    //HSV_GOLD, HSV_GOLDENROD, HSV_GREEN, HSV_MAGENTA, HSV_ORANGE, HSV_PINK
+    //HSV_PURPLE, HSV_RED, HSV_SPRINGGREEN, HSV_TEAL, HSV_TURQUOISE, HSV_WHITE, HSV_YELLOW
+
+    //COLOR FOR LAYERS
+    //HSV "COLOR" = {HSV_COLOR};
+    HSV lower_color = {HSV_BLUE};
+    HSV raise_color = {HSV_ORANGE};
+    HSV capslock_color = {HSV_YELLOW};
+
+    //HSV CONVERTED INTO RGB
+     RGB  rgb_con;
+
+  switch(get_highest_layer(layer_state)){
     case _RAISE:
-      for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
-          rgb_matrix_set_color(i, 255, 100, 0);
-      }
+        if (raise_color.v > rgb_matrix_get_val()){
+        raise_color.v = rgb_matrix_get_val();
+        }
+        rgb_con = hsv_to_rgb(raise_color);
+        for(int i = 0; i<= DRIVER_LED_TOTAL; i++){
+            rgb_matrix_set_color(i, rgb_con.r, rgb_con.g, rgb_con.b);
+        }
       break;
 
     case _LOWER:
-      for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
-         rgb_matrix_set_color(i, 0, 45, 255);
-      }
+        if (lower_color.v > rgb_matrix_get_val()){
+        lower_color.v = rgb_matrix_get_val();
+        }
+        rgb_con = hsv_to_rgb(lower_color);
+        for(int i = 0; i<= DRIVER_LED_TOTAL; i++){
+            rgb_matrix_set_color(i, rgb_con.r, rgb_con.g, rgb_con.b);
+        }
       break;
 
     default:
-
       break;
   }
-  #endif
 }
+#endif
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }
@@ -340,10 +366,6 @@ void render_status_secondary(void) {
 }
 
 bool oled_task_user(void) {
-#ifndef SPLIT_KEYBOARD
-    else { oled_on(); }
-#endif
-
     if (is_keyboard_master()) {
         render_status_main();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
     } else {
