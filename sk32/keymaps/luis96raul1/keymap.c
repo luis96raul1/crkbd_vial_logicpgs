@@ -138,7 +138,6 @@ void rgb_matrix_indicators_user(void) {
     //HSV "COLOR" = {HSV_COLOR};
     HSV lower_color = {HSV_BLUE};
     HSV raise_color = {HSV_ORANGE};
-    HSV capslock_color = {HSV_YELLOW};
 
     //HSV CONVERTED INTO RGB
      RGB  rgb_con;
