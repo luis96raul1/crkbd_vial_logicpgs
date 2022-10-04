@@ -138,11 +138,7 @@ void rgb_matrix_indicators_user(void) {
       break;
 
     default:
-        if (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)) {
-                  for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
-          rgb_matrix_set_color(i, 255, 200, 0);
-      }
-       }
+
       break;
   }
   #endif
@@ -344,10 +340,6 @@ void render_status_secondary(void) {
 }
 
 bool oled_task_user(void) {
-    if (timer_elapsed32(oled_timer) > 1500000) {
-        oled_off();
-        return true;
-    }
 #ifndef SPLIT_KEYBOARD
     else { oled_on(); }
 #endif

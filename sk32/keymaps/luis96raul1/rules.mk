@@ -20,3 +20,5 @@ GRAVE_ESC_ENABLE = no
 MAGIC_ENABLE = no
 MIDI_ENABLE = no
 KEY_OVERRIDE_ENABLE = no
+
+CONSOLE_ENABLE = no         # Console for debug
