@@ -4,7 +4,6 @@
 
 ## ONLY USING VIAL 
 
-<hr/>
 <br/>
 
 First of all, you must download vial software <b><a href="https://get.vial.today/download/" target="_blank">here</a></b> and setting your computer input language to english international (in order to having latin characters able: á, é, í, ó, ú, ñ).
@@ -28,7 +27,6 @@ Here is the link to vial <b><a href="https://get.vial.today/manual/" target="_bl
 
 ## USING QMK
 
-<hr/>
 <br/>
 
-On progress...
+If you feel like a hardcore user and want to change some features that Vial don't allows you, you can follow the readme information of <a href="https://github.com/luis96raul1/crkbd_vial_logicpgs/tree/master/sk32">the guide</a>.
