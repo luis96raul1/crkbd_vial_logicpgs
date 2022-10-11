@@ -73,8 +73,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define WS2812_PWM_DRIVER PWMD1
 #define WS2812_PWM_CHANNEL 1
 #define WS2812_PWM_PAL_MODE 1
-#define WS2812_DMA_STREAM STM32_DMA2_STREAM1
-#define WS2812_DMA_CHANNEL 6
+#define WS2812_DMA_STREAM STM32_DMA2_STREAM6
+#define WS2812_DMA_CHANNEL 0
 
 #ifdef RGB_MATRIX_ENABLE
 #    define RGBLED_NUM 54 // NUMBER OF LEDS
@@ -87,3 +87,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // BOOTMAGIC
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 0
+
+//BOARD WITH 8MHz CRYSTAL
+#define STM32_HSECLK 8000000
