@@ -43,6 +43,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SERIAL_USART_RX_PIN A3
 #define SERIAL_USART_DRIVER SD2
 #define SERIAL_USART_TIMEOUT 20 //ADDITIONAL
+#define SERIAL_USART_TX_PAL_MODE 7
+#define SERIAL_USART_RX_PAL_MODE 7
 //#define SERIAL_USART_TIMEOUT 5 //ADDITIONAL
 //#define SERIAL_USART_CR2 0x0 //1 STOP BIT IS ENOUGH
 #define SELECT_SOFT_SERIAL_SPEED 1 //ADDITIONAL {1 - DEFAULT}
@@ -69,12 +71,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 // LIGHTING EFFECTS AND CONFIGURATION
+#undef RGB_DI_PIN
 #define RGB_DI_PIN A8
 #define WS2812_PWM_DRIVER PWMD1
 #define WS2812_PWM_CHANNEL 1
 #define WS2812_PWM_PAL_MODE 1
-#define WS2812_DMA_STREAM STM32_DMA2_STREAM6
-#define WS2812_DMA_CHANNEL 0
+#define WS2812_DMA_STREAM STM32_DMA2_STREAM5 //TIMX_UP
+#define WS2812_DMA_CHANNEL 6
+//#define WS2812_EXTERNAL_PULLUP
 
 #ifdef RGB_MATRIX_ENABLE
 #    define RGBLED_NUM 54 // NUMBER OF LEDS
@@ -87,6 +91,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // BOOTMAGIC
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 0
-
-//BOARD WITH 8MHz CRYSTAL
-#define STM32_HSECLK 8000000
