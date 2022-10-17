@@ -14,9 +14,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-//KEY GENERATED F0R VIAL
-#define VIAL_KEYBOARD_UID {0x63, 0x8B, 0x74, 0x2F, 0xE2, 0x8C, 0xAB, 0xC1}
-
 //NUMBER OF LAYERS AVAILABLE FOR THE KEYBOARD (VIAL)
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6  // LAYERS FOR KEYMAPS
 
@@ -32,25 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //HANDNESS
 #define MASTER_LEFT
-
-//SPLIT CONFIGURATION
-//REVIEW HOW THIS AFFECTS THE KEYBOARD
-# define SPLIT_LAYER_STATE_ENABLE
-# define SPLIT_LED_STATE_ENABLE
-# define SPLIT_MODS_ENABLE
-# define SPLIT_OLED_ENABLE
-
-//USB CONFIGURATION
-//ARM DEVICES #define SPLIT_USB_DETECT IS ENABLE BY DEFAULT
-//NEEDS REVIEW
-#define SPLIT_USB_TIMEOUT 3000
-#define SPLIT_USB_TIMEOUT_POLL 20
-
-/*
-#ifdef RGB_MATRIX_ENABLE
-    #define RGBLED_SPLIT
-#endif
-*/
 
 //TIME THAT THE OLED IS ON
 #ifdef OLED_ENABLE

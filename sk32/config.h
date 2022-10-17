@@ -16,16 +16,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "config_common.h"
 
+// KEY GENERATED F0R VIAL
+#define VIAL_KEYBOARD_UID \
+    { 0x63, 0x8B, 0x74, 0x2F, 0xE2, 0x8C, 0xAB, 0xC1 }
+
 // SPECIFY NUMBER OF ROWS AND COLUMNS
 // DOUBLE NUMBER OF ROWS
-#define MATRIX_ROWS  8
-#define MATRIX_COLS  6
+#define MATRIX_ROWS 8
+#define MATRIX_COLS 6
 
-//PINS FOR ROWS
+// PINS FOR ROWS
 #define MATRIX_ROW_PINS \
     { B1, B0, A5, A4 }
 
-//PINS FOR COLUMNS
+// PINS FOR COLUMNS
 #define MATRIX_COL_PINS \
     { B15, B14, B13, B12, A7, A6 }
 
@@ -35,6 +39,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* COL2ROW, ROW2COL */
 #define DIODE_DIRECTION COL2ROW
 
+// USB CONFIGURATION AND DETECTION (MASTER)
+// ARM DEVICES #define SPLIT_USB_DETECT IS ENABLE BY DEFAULT
+#define SPLIT_USB_DETECT
+#define SPLIT_USB_TIMEOUT 3000
+#define SPLIT_USB_TIMEOUT_POLL 20
+
+// SPLIT KEYBOARD CONFIGURATION
+#ifdef SPLIT_KEYBOARD
+#    define SPLIT_LAYER_STATE_ENABLE
+#    define SPLIT_LED_STATE_ENABLE
+#    define SPLIT_MODS_ENABLE
+#    ifdef OLED_ENABLE
+#        define SPLIT_OLED_ENABLE
+#    endif
+#endif
+
 // COMMUNICATION BETWEEN HALVES
 // SERIAL COMMUNICATION FULL DUPLEX
 // USART2 DEFINED
@@ -42,24 +62,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SERIAL_USART_TX_PIN A2
 #define SERIAL_USART_RX_PIN A3
 #define SERIAL_USART_DRIVER SD2
-#define SERIAL_USART_TIMEOUT 20 //ADDITIONAL
+#define SERIAL_USART_TIMEOUT 20 // ADDITIONAL
 #define SERIAL_USART_TX_PAL_MODE 7
 #define SERIAL_USART_RX_PAL_MODE 7
-//#define SERIAL_USART_TIMEOUT 5 //ADDITIONAL
-//#define SERIAL_USART_CR2 0x0 //1 STOP BIT IS ENOUGH
-#define SELECT_SOFT_SERIAL_SPEED 1 //ADDITIONAL {1 - DEFAULT}
+#define SELECT_SOFT_SERIAL_SPEED 1 // ADDITIONAL {1 - DEFAULT}
 
-//#define FORCED_SYNC_THROTTLE_MS 500 //ADDITIONAL
-                 
-// OLED DISPLAY 128x64
-// I2C COMMUNICATION
-// SCL B6 PIN
-// SDA B7 PIN
+// OLED DISPLAY
+//  I2C COMMUNICATION
 #ifdef OLED_ENABLE
-    #define OLED_BRIGHTNESS 150
-    //#define OLED_DISPLAY_128X64
-    //#define I2C1_SCL_PIN B6
-    //#define I2C1_SDA_PIN B7
+#    define OLED_BRIGHTNESS 150
 #endif
 
 // LIGHTING EFFECTS AND CONFIGURATION
@@ -68,9 +79,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define WS2812_PWM_DRIVER PWMD1
 #define WS2812_PWM_CHANNEL 1
 #define WS2812_PWM_PAL_MODE 1
-#define WS2812_DMA_STREAM STM32_DMA2_STREAM5 //TIMX_UP
+#define WS2812_DMA_STREAM STM32_DMA2_STREAM5 // TIMX_UP
 #define WS2812_DMA_CHANNEL 6
-//#define WS2812_EXTERNAL_PULLUP
 
 #ifdef RGB_MATRIX_ENABLE
 #    define RGBLED_NUM 54 // NUMBER OF LEDS
@@ -84,5 +94,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define BOOTMAGIC_LITE_ROW 0
 #define BOOTMAGIC_LITE_COLUMN 0
 
-//BOARD WITH 8MHz CRYSTAL
-#define STM32_HSECLK 8000000
+// BOARD WITH 8MHz CRYSTAL
+#ifdef CRYSTAL_8MHZ
+#    define STM32_HSECLK 8000000
+#endif

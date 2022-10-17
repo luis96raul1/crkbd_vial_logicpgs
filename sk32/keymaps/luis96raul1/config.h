@@ -4,8 +4,6 @@
 
 #pragma once
 
-#define VIAL_KEYBOARD_UID {0x63, 0x8B, 0x74, 0x2F, 0xE2, 0x8C, 0xAB, 0xC1}
-
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6  // LAYERS FOR KEYMAPS
 
 // TAP DANCE
@@ -19,10 +17,6 @@
 
 // OLED FONT
 #ifdef OLED_ENABLE
-#   define SPLIT_LAYER_STATE_ENABLE
-#   define SPLIT_LED_STATE_ENABLE
-#   define SPLIT_MODS_ENABLE
-#   define SPLIT_OLED_ENABLE
 #   define OLED_FONT_H "keyboards/crkbd_vial_logicpgs/sk32/keymaps/luis96raul1/glcdfont.c"
 #   define OLED_TIMEOUT 0
 #endif
@@ -37,7 +31,7 @@
 // #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_LED_PROCESS_LIMIT (DRIVER_LED_TOTAL + 4) / 5  // limits the number of LEDs to process in an animation per task run (increases keyboard responsiveness)
 #define RGB_MATRIX_LED_FLUSH_LIMIT 16                            // limits in milliseconds how frequently an animation will update the LEDs. 16 (16ms) is equivalent to limiting to 60fps (increases keyboard responsiveness)
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150                        // limits maximum brightness of LEDs to 150 out of 255. Higher may cause the controller to crash.
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 100                        // limits maximum brightness of LEDs to 150 out of 255. Higher may cause the controller to crash.
 #define RGB_MATRIX_HUE_STEP 3
 #define RGB_MATRIX_SAT_STEP 8
 #define RGB_MATRIX_VAL_STEP 8
